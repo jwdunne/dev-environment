@@ -6,7 +6,6 @@
   become: yes
 
   roles:
-    - essentials
     - python
     - molecule
     - gnome
