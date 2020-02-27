@@ -3,14 +3,16 @@
 - name: Configure my Debian system
   hosts: 127.0.0.1
   connection: local
+  become: yes
 
   roles:
+    - essentials
+    - python
+    - molecule
     - gnome
-    - editing
+    - editor
     - zsh
     - go
     - rust
     - javascript
     - typescript
-    - python
-    - 
