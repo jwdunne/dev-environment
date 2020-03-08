@@ -4,13 +4,12 @@
   connection: local
   become: yes
 
-  vars_files:
-    - config/editor.yml
-    - config/python.yml
-
   roles:
-    - editor
+    # Shell
+    - shell
     - python
+    - editor
+    # Ansible
     # Node
     # Molecule
     # Markdown
