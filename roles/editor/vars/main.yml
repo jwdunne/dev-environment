@@ -13,8 +13,16 @@ editor_exts:
   # Rust
   # Writing
 
+editor_base_path: "~/.config/Code/User"
+
+editor_keymap_path: "{{ editor_base_path }}/keybindings.json"
+editor_keymap:
+  - key: ctrl+k t
+    command: workbench.action.terminal.focus
+    when: editorTextFocus
+
 editor_config_base_separator: "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"
-editor_config_path: ~/.config/Code/User/settings.json
+editor_config_path: "{{ editor_base_path }}/settings.json"
 editor_config:
   # Traversal
   editor.multiCursorModifier: ctrlCmd

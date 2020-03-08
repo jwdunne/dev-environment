@@ -18,6 +18,7 @@
   apt:
     state: present
     name: code
+    cache_valid_time: "{{ 24 * 60 * 60 }}"
   tags:
     - editor
 
@@ -63,10 +64,19 @@
   tags:
     - editor
 
-- name: Create default config
+- name: Configure settings
   template:
     src: "settings.json.j2"
     dest: "{{ editor_config_path }}"
+  become: no
+  tags:
+    - editor
+    - config
+
+- name: Configure key mappings
+  template:
+    src: "keymap.json.j2"
+    dest: "{{ editor_keymap_path }}"
   become: no
   tags:
     - editor
