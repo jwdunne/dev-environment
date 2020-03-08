@@ -29,24 +29,28 @@
   become: no
   tags:
     - editor
+    - editor-ext
 
 - name: Set installed extensions fact
   set_fact:
     editor_installed_exts: "{{ editor_exts_stdout.stdout_lines }}"
   tags:
     - editor
+    - editor-ext
 
 - name: Set extensions to install fact
   set_fact:
     editor_exts_to_install: "{{ editor_exts | difference(editor_installed_exts) }}"
   tags:
     - editor
+    - editor-ext
 
 - name: Set extensions to uninstall fact
   set_fact:
     editor_exts_to_uninstall: "{{ editor_installed_exts | difference(editor_exts) }}"
   tags:
     - editor
+    - editor-ext
 
 - name: Install extensions
   command: code --install-extension={{ item }}
@@ -55,6 +59,7 @@
   changed_when: editor_exts_to_install|length > 0
   tags:
     - editor
+    - editor-ext
 
 - name: Uninstall extensions
   command: code --uninstall-extension={{ item }}
@@ -63,6 +68,7 @@
   changed_when: editor_exts_to_uninstall|length > 0
   tags:
     - editor
+    - editor-ext
 
 - name: Configure settings
   template:
