@@ -1,0 +1,13 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ 24 * 60 * 60 }}"
+  tags:
+    - shell
+
+- name: Install shellcheck
+  apt:
+    name: shellcheck
+  tags:
+    - shell
