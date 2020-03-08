@@ -11,3 +11,20 @@
     name: shellcheck
   tags:
     - shell
+
+- name: Download shellcheck binary
+  get_url:
+    url: "{{ shell_linter_url }}"
+    dest: "{{ shell_linter_archive_path }}"
+  tags:
+    - shell
+    - shell-linter
+
+- name: Unarchive shellcheck binary
+  unarchive:
+    src: "{{ shell_linter_archive_path }}"
+    dest: "{{ shell_linter_bin_path }}"
+    mode: 0755
+  tags:
+    - shell
+    - shell-linter
