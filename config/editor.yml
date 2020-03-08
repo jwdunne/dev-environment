@@ -9,14 +9,26 @@ editor_exts:
   - ms-python.python
   - yzhang.markdown-all-in-one
   - DavidAnson.vscode-markdownlint
+  - dbankier.vscode-quick-select
   # Rust
   # Writing
 
+editor_config_base_separator: "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"
 editor_config_path: ~/.config/Code/User/settings.json
 editor_config:
+  # Traversal
   editor.multiCursorModifier: ctrlCmd
+  editor.wordSeparators: "{{ editor_config_base_separator }}"
+
+  # Formatting
   trailing-spaces.trimOnSave: yes
   editor.formatOnSave: yes
+
+  # YAML
+  "[yaml]":
+    editor.wordSeparators: "{{ editor_config_base_separator }}_"
+
+  # Python
   python.formatting.provider: "black"
   "[python]":
     editor.formatOnPaste: no
