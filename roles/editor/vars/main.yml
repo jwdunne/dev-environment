@@ -11,6 +11,7 @@ editor_exts:
   - DavidAnson.vscode-markdownlint
   - dbankier.vscode-quick-select
   - timonwong.shellcheck
+  - Gruntfuggly.todo-tree
   # Rust
   # Writing
 
