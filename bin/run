@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 TAGS="$1"
 
-ansible-playbook configure.yml --tags="$TAGS"
+ansible-playbook configure.yml --tags="${TAGS}"

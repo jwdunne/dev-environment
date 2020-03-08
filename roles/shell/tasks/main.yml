@@ -6,16 +6,20 @@
   tags:
     - shell
 
-- name: Install shellcheck
-  apt:
-    name: shellcheck
+- name: Create shellcheck binaries dir
+  file:
+    path: "{{ shell_binaries_dir }}/shellcheck"
+    state: directory
+  become: no
   tags:
     - shell
+    - shell-linter
 
 - name: Download shellcheck binary
   get_url:
     url: "{{ shell_linter_url }}"
     dest: "{{ shell_linter_archive_path }}"
+  become: no
   tags:
     - shell
     - shell-linter
@@ -23,8 +27,20 @@
 - name: Unarchive shellcheck binary
   unarchive:
     src: "{{ shell_linter_archive_path }}"
-    dest: "{{ shell_linter_bin_path }}"
+    dest: "{{ shell_binaries_dir }}/shellcheck"
     mode: 0755
+  become: no
+  tags:
+    - shell
+    - shell-linter
+
+- name: Link shellcheck binary to path
+  file:
+    src: "{{ shell_linter_bin_src }}"
+    dest: "{{ shell_linter_bin_dest }}"
+    mode: 0755
+    state: link
+  become: yes
   tags:
     - shell
     - shell-linter

@@ -1,6 +1,7 @@
 ---
-shell_binaries_path: "~/binaries"
+shell_binaries_dir: "/home/james/binaries"
 
 shell_linter_url: https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.x86_64.tar.xz
-shell_linter_archive_path: "{{ shell_binaries_path }}/shellcheck.tar.gz"
-shell_linter_bin: "/usr/local/bin"
+shell_linter_archive_path: "{{ shell_binaries_dir }}/shellcheck.tar.gz"
+shell_linter_bin_src: "{{ shell_binaries_dir }}/shellcheck/shellcheck-stable/shellcheck"
+shell_linter_bin_dest: "/usr/local/bin/shellcheck"
