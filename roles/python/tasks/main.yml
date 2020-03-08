@@ -1,19 +1,42 @@
 ---
+- name: Add signing key
+  apt_key:
+    state: present
+    keyserver: "{{ python_repo_keyserver }}"
+    id: "{{ python_repo_key_id }}"
+  tags:
+    - python
 
-- name: "Update apt"
-  apt: update_cache=yes
+- name: Add python apt repo
+  apt_repository:
+    state: present
+    repo: "{{ python_repo }}"
+    codename: "{{ python_repo_codename }}"
+    update_cache: yes
+  tags:
+    - python
+# Install global pip packages
 
-- name: "Install essential packages"
-  apt:
-    name:
-      - "build-essential"
-      - "libreadline-gplv2-dev"
-      - "libncursesw5-dev"
-      - "libssl-dev"
-      - "libsqlite3-dev"
-      - "tk-dev"
-      - "libgdbm-dev"
-      - "libc6-dev"
-      - "libbz2-dev"
-      - "libffi-dev"
-      - "zlib1g-dev"
+- name: Download get-pip.py
+  get_url:
+    url: "{{ python_get_pip_url }}"
+    dest: "~/get-pip.py"
+  become: no
+  tags:
+    - python
+
+- name: Install pip for default python
+  command: "python{{ python_default_version }} ~/get-pip.py --user"
+  become: no
+  changed_when: False
+  tags:
+    - python
+
+- name: Install global packages
+  pip:
+    name: "{{ python_packages }}"
+    state: present
+    executable: "pip{{ python_default_version }}"
+  become: no
+  tags:
+    - python

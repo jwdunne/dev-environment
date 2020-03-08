@@ -1,2 +1,72 @@
 ---
-# tasks file for editor
+- name: Add editor repo signing key
+  apt_key:
+    state: present
+    url: "{{ editor_repo_key_url }}"
+  tags:
+    - editor
+
+- name: Add editor repo
+  apt_repository:
+    state: present
+    repo: "{{ editor_repo }}"
+    update_cache: yes
+  tags:
+    - editor
+
+- name: Install editor
+  apt:
+    state: present
+    name: code
+  tags:
+    - editor
+
+- name: List installed extensions from stdout
+  command: code --list-extensions
+  changed_when: False
+  register: editor_exts_stdout
+  become: no
+  tags:
+    - editor
+
+- name: Set installed extensions fact
+  set_fact:
+    editor_installed_exts: "{{ editor_exts_stdout.stdout_lines }}"
+  tags:
+    - editor
+
+- name: Set extensions to install fact
+  set_fact:
+    editor_exts_to_install: "{{ editor_exts | difference(editor_installed_exts) }}"
+  tags:
+    - editor
+
+- name: Set extensions to uninstall fact
+  set_fact:
+    editor_exts_to_uninstall: "{{ editor_installed_exts | difference(editor_exts) }}"
+  tags:
+    - editor
+
+- name: Install extensions
+  command: code --install-extension={{ item }}
+  loop: "{{ editor_exts_to_install }}"
+  become: no
+  changed_when: editor_exts_to_install|length > 0
+  tags:
+    - editor
+
+- name: Uninstall extensions
+  command: code --uninstall-extension={{ item }}
+  loop: "{{ editor_exts_to_uninstall }}"
+  become: no
+  changed_when: editor_exts_to_uninstall|length > 0
+  tags:
+    - editor
+
+- name: Create default config
+  template:
+    src: "settings.json.j2"
+    dest: "{{ editor_config_path }}"
+  become: no
+  tags:
+    - editor

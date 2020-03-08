@@ -1,17 +1,18 @@
 ---
-
 - name: Configure my Debian system
   hosts: 127.0.0.1
   connection: local
   become: yes
 
+  vars_files:
+    - config/editor.yml
+    - config/python.yml
+
   roles:
-    - python
-    - molecule
-    - gnome
     - editor
-    - zsh
-    - go
-    - rust
-    - javascript
-    - typescript
+    - python
+    # Node
+    # Molecule
+    # Markdown
+    # ZSH
+    # Rust

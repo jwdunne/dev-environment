@@ -1,0 +1,23 @@
+---
+python_repo: ppa:deadsnakes/ppa
+python_repo_codename: bionic
+python_repo_keyserver: keyserrver.ubuntu.com
+python_repo_key_id: F23C5A6CF475977595C89F51BA6932366A755776
+
+python_versions:
+  - 3.5
+  - 3.6
+  - 3.7
+  - 3.8
+  - 3.9
+
+python_default_version: 3.8
+
+python_packages:
+  - pipenv
+  - black
+  - flake8
+  - radon
+  - xenon
+
+python_get_pip_url: https://bootstrap.pypa.io/get-pip.py
