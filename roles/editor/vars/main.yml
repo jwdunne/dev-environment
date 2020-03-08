@@ -40,5 +40,7 @@ editor_config:
 
   # Python
   python.formatting.provider: "black"
+  python.linting.flake8Enabled: yes
+  python.linting.pylintEnabled: no
   "[python]":
     editor.formatOnPaste: no
