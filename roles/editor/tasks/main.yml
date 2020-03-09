@@ -87,3 +87,16 @@
   tags:
     - editor
     - config
+
+- name: test module
+  vscode_ext:
+    name: "hello world"
+    new: yes
+  register: testout
+  tags:
+    - module-test
+
+- debug:
+    var: testout
+  tags:
+    - module-test
