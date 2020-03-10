@@ -12,6 +12,7 @@ editor_exts:
   - dbankier.vscode-quick-select
   - timonwong.shellcheck
   - Gruntfuggly.todo-tree
+  - stkb.rewrap
   # Rust
   # Writing
 
@@ -33,6 +34,10 @@ editor_config:
   # Formatting
   trailing-spaces.trimOnSave: yes
   editor.formatOnSave: yes
+  editor.wordWrap: "wordWrapColumn"
+  editor.wordWrapColumn: 80
+  editor.rulers:
+    - 80
 
   # YAML
   "[yaml]":
