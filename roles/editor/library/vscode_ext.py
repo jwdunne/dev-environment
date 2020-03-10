@@ -39,21 +39,25 @@ author:
 """
 
 EXAMPLES = """
-# Pass in a message
-- name: Test with a message
-  my_test:
-    name: hello world
+# Pass in a package name
+- name: Test with a single package name
+  vscode_ext:
+    name: shardulm94.trailing-spaces
+    state: present
 
-# pass in a message and have changed true
-- name: Test with a message and changed output
-  my_test:
-    name: hello world
-    new: true
+# pass in a list of package names
+- name: Test with a list of package names
+  vscode_ext:
+    name:
+      - shardulm94.trailing-spaces
+      - ms-python.python
+    state: present
 
 # fail the module
-- name: Test failure of the module
-  my_test:
+- name: Test module failure
+  vscode_ext:
     name: fail me
+    state: present
 """
 
 RETURN = """
