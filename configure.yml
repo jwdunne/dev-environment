@@ -8,6 +8,7 @@
     - shell
     - python
     - editor
+    - docker
     # TODO: Ansible
     # TODO: Node
     # TODO: Molecule

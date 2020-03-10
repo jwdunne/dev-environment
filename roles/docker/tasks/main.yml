@@ -1,0 +1,44 @@
+---
+- name: Update apt
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ 24 * 60 * 60 }}"
+  tags:
+    - docker
+
+- name: Install packages required by the docker repo
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg2
+      - software-properties-common
+    state: present
+  tags:
+    - docker
+
+- name: Add dockler repo signing key
+  apt_key:
+    url: "{{ docker_repo_key_url }}"
+    state: present
+  tags:
+    - docker
+
+- name: Add docker repo
+  apt_repository:
+    repo: "{{ docker_repo }}"
+    state: present
+    update_cache: yes
+  tags:
+    - docker
+
+- name: Install docker
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+  tags:
+    - docker

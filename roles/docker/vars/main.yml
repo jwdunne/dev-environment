@@ -1,0 +1,5 @@
+---
+docker_repo_key_url: https://download.docker.com/linux/debian/gpg
+docker_repo: >
+  deb [arch=amd64] https://download.docker.com/linux/debian
+  buster stable
