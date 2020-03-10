@@ -35,10 +35,29 @@
 
 - name: Install docker
   apt:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
+    name: "{{ docker_packages }}"
     state: present
+  tags:
+    - docker
+
+- name: Create docker group
+  group:
+    name: docker
+    state: present
+  tags:
+    - docker
+
+- name: Add current user to group
+  user:
+    name: "{{ ansible_user }}"
+    groups:
+      - docker
+    append: yes
+  tags:
+    - docker
+
+- name: Run newgrp
+  command: newgrp docker
+  changed_when: no
   tags:
     - docker
