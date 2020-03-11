@@ -13,6 +13,7 @@ editor_exts:
   - timonwong.shellcheck
   - Gruntfuggly.todo-tree
   - stkb.rewrap
+  - ms-azuretools.vscode-docker
   # Rust
   # Writing
 
